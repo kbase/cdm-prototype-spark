@@ -4,7 +4,7 @@
 # Can't seem to find any usage documentation, so've just been reading the code to figure out how
 # they work
 
-FROM ubuntu:22.04 as build
+FROM ubuntu:24.04 as build
 
 RUN apt update -y
 RUN apt install -y wget
