@@ -26,6 +26,7 @@ services:
       - spark-master
     environment:
       - MODE=worker
+      - PORT=8091
       - WEBPORT=8081
       - CORES=2
       - MEM=1G
@@ -41,6 +42,7 @@ services:
       - spark-master
     environment:
       - MODE=worker
+      - PORT=8092
       - WEBPORT=8082
       - CORES=2
       - MEM=1G
