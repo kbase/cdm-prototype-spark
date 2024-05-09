@@ -1,0 +1,47 @@
+version: '3'
+
+# This docker-compose is for developer convenience, not for running in production.
+
+services:
+
+  spark-master:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "7077:7077"
+      - "8080:8080"
+    environment:
+      - MODE=master
+      - PORT=7077
+      - WEBPORT=8080
+      
+  spark-worker1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    depends_on:
+      - spark-master
+    environment:
+      - MODE=worker
+      - WEBPORT=8081
+      - CORES=2
+      - MEM=1G
+      - SPARK_MASTER_URL=spark://spark-master:7077
+
+  spark-worker2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    depends_on:
+      - spark-master
+    environment:
+      - MODE=worker
+      - WEBPORT=8082
+      - CORES=2
+      - MEM=1G
+      - SPARK_MASTER_URL=spark://spark-master:7077
