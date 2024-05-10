@@ -17,7 +17,9 @@ RUN wget -q https://dlcdn.apache.org/spark/spark-3.5.1/$SPARK_VER.tgz && \
     tar -xf $SPARK_VER.tgz
 
 
-FROM eclipse-temurin:17.0.11_9-jre-jammy
+# https://stackoverflow.com/questions/73465937/apache-spark-3-3-0-breaks-on-java-17-with-cannot-access-class-sun-nio-ch-direct
+# https://stackoverflow.com/questions/72724816/running-unit-tests-with-spark-3-3-0-on-java-17-fails-with-illegalaccesserror-cl
+FROM eclipse-temurin:11.0.23_9-jre-jammy
 
 ENV SPARK_VER=spark-3.5.1-bin-hadoop3-scala2.13
 ENV PYTHON_VER=python3.11
