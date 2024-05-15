@@ -60,3 +60,4 @@ services:
     environment:
       - MODE=notebook
       - PORT=4041
+      - SPARK_MASTER_URL=spark://spark-master:7077

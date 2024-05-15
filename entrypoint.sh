@@ -30,8 +30,8 @@ elif [ "$MODE" == "bash" ] ; then
 elif [ "$MODE" == "notebook" ] ; then
     echo "starting jupyter notebook"
     WORKSPACE_DIR="/cdm_shared_workspace"
-    mkdir -p "$WORKSPACE_DIR" || { echo "Error: Failed to create workspace directory"; exit 1; }
-    cd "$WORKSPACE_DIR" || { echo "Error: Failed to navigate to workspace directory"; exit 1; }
+    mkdir -p "$WORKSPACE_DIR"
+    cd "$WORKSPACE_DIR"
     jupyter lab --ip=0.0.0.0 \
                 --port=$PORT \
                 --no-browser \

@@ -28,7 +28,7 @@ ENV PYTHON_VER=python3.11
 RUN apt update && \
 	apt-get install -y software-properties-common && \
 	add-apt-repository ppa:deadsnakes/ppa && \
-	apt install -y $PYTHON_VER python3-pip gcc $PYTHON_VER-dev && \
+	apt install -y $PYTHON_VER python3-pip $PYTHON_VER-dev && \
 	apt install -y r-base r-base-dev && \
 	rm -rf /var/lib/apt/lists/*
 

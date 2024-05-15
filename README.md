@@ -27,8 +27,8 @@ Pi is roughly 3.144080
 
 ### Submitting a Spark Job via Jupyter Notebook
 
-After launching the Jupyter Notebook, establish a Spark context or session with the master set to 
-`spark://spark-master:7077` and proceed to submit your job. Once the job is submitted, you can monitor 
+After launching the Jupyter Notebook, establish a Spark context or session with the master set to the environment variable 
+SPARK_MASTER_URL and proceed to submit your job. Once the job is submitted, you can monitor 
 the job status and logs in the Spark UI.
 
 Sample code to calculate Pi using `SparkContext`:
@@ -37,8 +37,11 @@ import findspark
 findspark.init()
 from pyspark import SparkConf, SparkContext
 import random
+import os
 
-conf = SparkConf().setMaster("spark://spark-master:7077").setAppName("Pi")
+spark_master_url = os.environ['SPARK_MASTER_URL']
+
+conf = SparkConf().setMaster(spark_master_url).setAppName("Pi")
 sc = SparkContext(conf=conf)
 
 num_samples = 100000000
@@ -56,9 +59,12 @@ Sample code to create a DataFrame and display the contents with `SparkSession`:
 import findspark
 findspark.init()
 from pyspark.sql import SparkSession
+import os
+
+spark_master_url = os.environ['SPARK_MASTER_URL']
 
 spark = SparkSession.builder \
-    .master("spark://spark-master:7077") \
+    .master(spark_master_url) \
     .appName("TestSparkJob") \
     .getOrCreate()
 
