@@ -27,6 +27,18 @@ elif [ "$MODE" == "worker" ] ; then
     /opt/spark/sbin/start-worker.sh --cores "$CORES" --memory "$MEM" "$SPARK_MASTER_URL"
 elif [ "$MODE" == "bash" ] ; then
     bash
+elif [ "$MODE" == "notebook" ] ; then
+    echo "starting jupyter notebook"
+    WORKSPACE_DIR="/cdm_shared_workspace"
+    mkdir -p "$WORKSPACE_DIR"
+    cd "$WORKSPACE_DIR"
+    jupyter lab --ip=0.0.0.0 \
+                --port=$PORT \
+                --no-browser \
+                --allow-root \
+                --notebook-dir="$WORKSPACE_DIR" \
+                --ServerApp.token='' \
+                --ServerApp.password=''
 else
     echo "Unrecognized MODE env var: [$MODE]"
 fi
