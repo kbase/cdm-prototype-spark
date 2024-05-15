@@ -15,7 +15,6 @@ services:
       - MODE=master
       - PORT=7077
       - WEBPORT=8080
-    network_mode: host
 
   spark-worker1:
     build:
@@ -32,7 +31,6 @@ services:
       - CORES=2
       - MEM=1G
       - SPARK_MASTER_URL=spark://spark-master:7077
-    network_mode: host
 
   spark-worker2:
     build:
@@ -49,7 +47,6 @@ services:
       - CORES=2
       - MEM=1G
       - SPARK_MASTER_URL=spark://spark-master:7077
-    network_mode: host
 
   notebook:
     build:
@@ -63,4 +60,3 @@ services:
     environment:
       - MODE=notebook
       - PORT=4041
-    network_mode: host
