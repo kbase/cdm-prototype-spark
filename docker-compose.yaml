@@ -15,7 +15,7 @@ services:
       - MODE=master
       - PORT=7077
       - WEBPORT=8080
-      
+
   spark-worker1:
     build:
       context: .
@@ -47,3 +47,16 @@ services:
       - CORES=2
       - MEM=1G
       - SPARK_MASTER_URL=spark://spark-master:7077
+
+  notebook:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4040:4040"
+      - "4041:4041"
+    depends_on:
+      - spark-master
+    environment:
+      - MODE=notebook
+      - PORT=4041

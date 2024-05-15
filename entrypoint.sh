@@ -24,6 +24,8 @@ elif [ "$MODE" == "worker" ] ; then
     /opt/spark/sbin/start-worker.sh --cores "$CORES" --memory "$MEM" "$SPARK_MASTER_URL"
 elif [ "$MODE" == "bash" ] ; then
     bash
+elif [ "$MODE" == "notebook" ] ; then
+    jupyter lab --ip=0.0.0.0 --port=$PORT --no-browser --allow-root --ServerApp.token='' --ServerApp.password=''
 else
     echo "Unrecognized MODE env var: [$MODE]"
 fi

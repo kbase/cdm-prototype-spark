@@ -28,7 +28,7 @@ ENV PYTHON_VER=python3.11
 RUN apt update && \
 	apt-get install -y software-properties-common && \
 	add-apt-repository ppa:deadsnakes/ppa && \
-	apt install -y $PYTHON_VER python3-pip && \
+	apt install -y $PYTHON_VER python3-pip gcc $PYTHON_VER-dev && \
 	apt install -y r-base r-base-dev && \
 	rm -rf /var/lib/apt/lists/*
 
@@ -45,6 +45,10 @@ RUN mkdir /opt/spark
 COPY --from=build /opt/$SPARK_VER/ /opt/spark/
 # this doesn't seem to actually work
 RUN echo "spark.pyspark.python /usr/bin/$PYTHON_VER" > /opt/spark/conf/spark-defaults.conf
+
+RUN /usr/bin/$PYTHON_VER -m pip install --upgrade pip && \
+    /usr/bin/$PYTHON_VER -m pip install --force-reinstall psutil==5.9.8 && \
+    /usr/bin/$PYTHON_VER -m pip install jupyterlab==4.2.0 pyspark==3.5.1 findspark==2.0.1
 
 COPY entrypoint.sh /opt/
 RUN chmod a+x /opt/entrypoint.sh
