@@ -10,10 +10,13 @@ export SPARK_NO_DAEMONIZE=true
 # these two env vars don't seem to work
 export PYSPARK_PYTHON=$PYTHON_VER
 export PYSPARK_DRIVER_PYTHON=$PYTHON_VER
+
 export SPARK_MASTER_HOST=0.0.0.0
 export SPARK_MASTER_PORT=$PORT
 export SPARK_MASTER_WEBUI_PORT=$WEBPORT
-export SPARK_WORKER_PORT=$PORT
+if [ -n "$PORT" ]; then
+    export SPARK_WORKER_PORT=$PORT
+fi
 export SPARK_WORKER_WEBUI_PORT=$WEBPORT
 
 if [ "$MODE" == "master" ] ; then
